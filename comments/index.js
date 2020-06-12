@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const uuid = require('uuid').v1;
+const axios = require('axios');
 
 const app = express();
 app.use(bodyParser.json());
@@ -13,17 +14,29 @@ app.get('/posts/:id/comments', (req, res) => {
   res.send(comments[req.params.id] || []);
 });
 
-app.post('/posts/:id/comments', (req, res) => {
+app.post('/posts/:id/comments', async (req, res) => {
   const { comment } = req.body;
   const postID = req.params.id;
   const id = uuid();
-  let postComments = comments[postID] || [];
-  postComments.push({
+  const data = {
     id,
     comment,
-  });
+  };
+  let postComments = comments[postID] || [];
+  postComments.push(data);
   comments[postID] = postComments;
+
+  await axios.post('http://localhost:4005/events', {
+    type: 'CommentCreated',
+    data: {...data, postID},
+  });
+
   res.status(201).send(postComments);
+});
+
+app.post('/events', (req, res) => {
+  console.log('received event:', req.body.type);
+  res.send({});
 });
 
 app.listen(4001, () => {
