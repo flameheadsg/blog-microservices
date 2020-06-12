@@ -7,6 +7,7 @@ export default () => {
     <div className="container" style={{padding: "2%"}}>
       <PostCreate />
       <hr />
+      <h2>Posts</h2>
       <PostList />
     </div>
   );
