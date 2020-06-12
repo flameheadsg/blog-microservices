@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const uuid = require('uuid').v1;
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 const posts = {}; // store posts in memory
 
