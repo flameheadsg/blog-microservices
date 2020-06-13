@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export default () => {
+export default ({ callback }) => {
   const [title, setTitle] = useState('');
 
   const onSubmit = async e => {
@@ -10,6 +10,7 @@ export default () => {
       title,
     });
     setTitle('');
+    callback();
   }
 
   return (

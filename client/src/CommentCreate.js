@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export default ({ postID }) => {
+export default ({ postID, callback }) => {
   const [comment, setComment] = useState('');
 
   const onSubmit = async e => {
@@ -10,6 +10,7 @@ export default ({ postID }) => {
       comment,
     });
     setComment('');
+    callback();
   }
 
   return (
