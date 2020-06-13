@@ -60,7 +60,7 @@ app.post('/events', (req, res) => {
 
 app.listen(4002, async () => {
   console.log('query service listening on post 4002');
-  const res = await axios.get('http://localhost:4005/events');
+  const res = await axios.get('http://events-srvc:4005/events');
   for (let event of res.data) {
     console.log('processing event:', event.type);
     handleEvent(event.type, event.data);

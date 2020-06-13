@@ -14,9 +14,9 @@ app.post('/events', async (req, res) => {
   events.push(event);
 
   await axios.post('http://posts-clusterip-srvc:4000/events', event); // posts
-  await axios.post('http://localhost:4001/events', event); // comments
-  await axios.post('http://localhost:4002/events', event); // query
-  await axios.post('http://localhost:4003/events', event); // moderator
+  await axios.post('http://comments-srvc:4001/events', event); // comments
+  await axios.post('http://query-srvc:4002/events', event); // query
+  await axios.post('http://moderator-srvc:4003/events', event); // moderator
   res.send({ status: 'OK' });
 });
 
