@@ -13,7 +13,7 @@ app.post('/events', async (req, res) => {
   const event = req.body;
   events.push(event);
 
-  await axios.post('http://localhost:4000/events', event); // posts
+  await axios.post('http://posts-clusterip-srvc:4000/events', event); // posts
   await axios.post('http://localhost:4001/events', event); // comments
   await axios.post('http://localhost:4002/events', event); // query
   await axios.post('http://localhost:4003/events', event); // moderator
